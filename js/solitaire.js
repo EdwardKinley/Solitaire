@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function prepareToMove() {
     movables = identifyMovables();
+    if (movables.length == 0) { endGame(); }
     for (i=0; i<movables.length; i++) {
       makeSpinnable(movables[i]);
       movables[i].addEventListener('click', movableClicked);
@@ -262,6 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function endGame() {
+    console.log('end!');
+    
+  }
 
 
 
