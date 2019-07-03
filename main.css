@@ -1,0 +1,98 @@
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+.main {
+  height: 98%;
+  width: 99%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.outerBoard {
+  height: 95vh;
+  width: 95vh;
+  min-width: 95vh;
+  background-color: brown;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("images/board.jpeg");
+}
+
+.rim {
+  border-radius: 50%;
+  height: 95%;
+  width: 95%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("images/marble.png");
+  background-size: 100% 100%;
+}
+
+.board {
+  height: 98%;
+  width: 98%;
+  background-color: brown;
+  border-radius: 50%;
+  background-image: url("images/board.jpeg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marble:hover {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.row {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.square {
+  height: 100%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hole {
+  height: 70%;
+  width: 70%;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("images/hole.png");
+}
+
+.marble {
+  height: 85%;
+  width: 85%;
+  border-radius: 50%;
+  /* background-image: url("images/marble3.png"); */
+  background-size: 100% 100%;
+
+}
