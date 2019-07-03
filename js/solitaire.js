@@ -69,18 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i=0; i<7; i++) {
       for (j=0; j<7; j++) {
         if (((i<2 || i>4) && ((j>1) && (j<5))) || (i==2 || i==4) || (i==3 && j!=3)) {
-          addMarble(document.querySelector(`#hole${i}${j}`));
+          const rn = Math.floor(Math.random()*3) + 10;
+          addMarble(document.querySelector(`#hole${i}${j}`), rn);
         }
       }
     }
   }
 
-  function addMarble(hole) {
+  function addMarble(hole, photo) {
     const marble = document.createElement('div');
     marble.className = 'marble';
     marble.id = `marble${hole.id.substring(4)}`;
-    const rn = Math.floor(Math.random()*3) +2;
-    marble.style.backgroundImage = `url("images/marble${rn}.png")`;
+    marble.style.backgroundImage = `url("images/marble${photo}.png")`;
     hole.appendChild(marble);
   }
 
@@ -217,15 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function move() {
-    console.log(selected);
-    console.log(this);
     const destination = this;
-    console.log(destination);
     const captured = identifyCaptured(selected, destination);
     removeBorder(selected);
     removeMarble(selected);
     removeMarble(captured);
-    addMarble(this);
+    const photo = `${selected.style.backgroundImage[18]}${selected.style.backgroundImage[19]}`;
+    addMarble(this, photo);
   }
 
   function removeMarble(marble) {
@@ -233,8 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function identifyCaptured(captor, destination) {
-    console.log('captor', captor.id);
-    console.log('destination', destination.id);
     if (captor.id[6] == destination.id[4] && captor.id[7] > destination.id[5]) { return document.querySelector(`#marble${parseInt(captor.id[6])}${parseInt(captor.id[7])-1}`); }
     else if (captor.id[6] == destination.id[4] && captor.id[7] < destination.id[5]) { return document.querySelector(`#marble${parseInt(captor.id[6])}${parseInt(captor.id[7])+1}`); }
     else if (captor.id[7] == destination.id[5] && captor.id[6] > destination.id[4]) { return document.querySelector(`#marble${parseInt(captor.id[6])-1}${parseInt(captor.id[7])}`); }
