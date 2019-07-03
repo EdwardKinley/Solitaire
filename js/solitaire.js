@@ -217,6 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function move() {
+    makeUnspinnable();
+    makeUnmovable();
+    movables = [];
+    doNotMove();
+    moves = [];
     const destination = this;
     const captured = identifyCaptured(selected, destination);
     removeBorder(selected);
@@ -224,6 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
     removeMarble(captured);
     const photo = `${selected.style.backgroundImage[18]}${selected.style.backgroundImage[19]}`;
     addMarble(this, photo);
+    selected = null;
+    prepareToMove();
   }
 
   function removeMarble(marble) {
@@ -235,6 +242,24 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (captor.id[6] == destination.id[4] && captor.id[7] < destination.id[5]) { return document.querySelector(`#marble${parseInt(captor.id[6])}${parseInt(captor.id[7])+1}`); }
     else if (captor.id[7] == destination.id[5] && captor.id[6] > destination.id[4]) { return document.querySelector(`#marble${parseInt(captor.id[6])-1}${parseInt(captor.id[7])}`); }
     else if (captor.id[7] == destination.id[5] && captor.id[6] < destination.id[4]) { return document.querySelector(`#marble${parseInt(captor.id[6])+1}${parseInt(captor.id[7])}`); }
+  }
+
+  function makeUnspinnable() {
+    for (i=0; i<movables.length; i++) {
+      movables[i].classList.remove('selectable');
+    }
+  }
+
+  function makeUnmovable() {
+    for (i=0; i<movables.length; i++) {
+      movables[i].removeEventListener('click', movableClicked);
+    }
+  }
+
+  function doNotMove() {
+    for (i=0; i<moves.length; i++) {
+      moves[i].removeEventListener('click', move);
+    }
   }
 
 
