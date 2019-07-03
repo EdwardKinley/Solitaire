@@ -107,12 +107,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const marbleOneAbove = document.querySelector(`#marble${parseInt(marble.id[6])-1}${parseInt(marble.id[7])}`);
     const holeTwoAbove = document.querySelector(`#hole${parseInt(marble.id[6])-2}${parseInt(marble.id[7])}`);
     const marbleTwoAbove = document.querySelector(`#marble${parseInt(marble.id[6])-2}${parseInt(marble.id[7])}`);
+
+    const marbleOneBelow = document.querySelector(`#marble${parseInt(marble.id[6])+1}${parseInt(marble.id[7])}`);
+    const holeTwoBelow = document.querySelector(`#hole${parseInt(marble.id[6])+2}${parseInt(marble.id[7])}`);
+    const marbleTwoBelow = document.querySelector(`#marble${parseInt(marble.id[6])+2}${parseInt(marble.id[7])}`);
+
+    const marbleOneRight = document.querySelector(`#marble${parseInt(marble.id[6])}${parseInt(marble.id[7])+1}`);
+    const holeTwoRight = document.querySelector(`#hole${parseInt(marble.id[6])}${parseInt(marble.id[7])+2}`);
+    const marbleTwoRight = document.querySelector(`#marble${parseInt(marble.id[6])}${parseInt(marble.id[7])+2}`);
+
+    const marbleOneLeft = document.querySelector(`#marble${parseInt(marble.id[6])}${parseInt(marble.id[7])-1}`);
+    const holeTwoLeft = document.querySelector(`#hole${parseInt(marble.id[6])}${parseInt(marble.id[7])-2}`);
+    const marbleTwoLeft = document.querySelector(`#marble${parseInt(marble.id[6])}${parseInt(marble.id[7])-2}`);
+
+    console.log('m1l', marbleOneLeft);
+    console.log('m2l', marbleTwoLeft);
+    console.log('h2l', holeTwoLeft);
+
     if ((marbleOneAbove != null) && (holeTwoAbove != null) && (marbleTwoAbove == null)) {
+      return true;
+    } else if ((marbleOneBelow != null) && (holeTwoBelow != null) && (marbleTwoBelow == null)) {
+      return true;
+    } else if ((marbleOneRight != null) && (holeTwoRight != null) && (marbleTwoRight == null)) {
+      return true;
+    } else if ((marbleOneLeft != null) && (holeTwoLeft != null) && (marbleTwoLeft == null)) {
       return true;
     }
   }
 
   function makeSelectable(marble) {
+    marble.classList.add('selectable');
     marble.addEventListener('click', () => {
       addBorder(marble);
       // marble.parentNode.removeChild(marble);
@@ -122,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function addBorder(marble) {
     marble.parentNode.style.border = '0.5vh solid gold';
   }
+
+
 
 
 
