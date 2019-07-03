@@ -35,15 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addSquaresToRow(row) {
-    // console.log(row);
     const rowID = row.id[3];
     for (k=0; k<7; k++) {
       const square = document.createElement('div');
       square.className = 'square';
       square.id = `square${rowID}${k}`;
       square.style.width = `${90/7}%`;
-      // square.textContent = `${square.id}`
-      // console.log(square.id);
       row.appendChild(square);
     }
   }
@@ -164,11 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
     moves = [];
   }
 
-  // function makeUnselected() {
-  //   const marble = this;
-  //   removeBorder(marble);
-  // }
-
   function addBorder(marble) {
     marble.parentNode.style.border = '0.5vh solid gold';
   }
@@ -218,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function move() {
+    // endGame();
     makeUnspinnable();
     makeUnmovable();
     movables = [];
@@ -265,9 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function endGame() {
     console.log('end!');
-    
+    const playAgainButton = document.createElement('button');
+    playAgainButton.textContent = 'Play again';
+    document.querySelector('#hole33').appendChild(playAgainButton);
+    console.log(playAgainButton.parentNode);
+    playAgainButton.addEventListener('click', () => {
+      location.reload();
+    })
   }
-
-
 
 })
