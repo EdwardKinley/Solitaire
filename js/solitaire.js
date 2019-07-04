@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   movables = [];
   selected = null;
   moves = [];
+  lastMover = null;
 
   prepareToMove();
 
@@ -63,11 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addMarbles() {
+    const photos = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41];
     for (i=0; i<7; i++) {
       for (j=0; j<7; j++) {
         if (((i<2 || i>4) && ((j>1) && (j<5))) || (i==2 || i==4) || (i==3 && j!=3)) {
-          const rn = Math.floor(Math.random()*3) + 10;
-          addMarble(document.querySelector(`#hole${i}${j}`), rn);
+          const rn1 = Math.floor(Math.random()*3) + 10;
+          const rn = Math.floor(Math.random() * photos.length);
+          addMarble(document.querySelector(`#hole${i}${j}`), rn1);
+          // addMarble(document.querySelector(`#hole${i}${j}`), rn);
         }
       }
     }
@@ -83,6 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function prepareToMove() {
     movables = identifyMovables();
+    console.log('movables', movables);
+    console.log('last mover', lastMover);
+    if (movables.includes(lastMover)) {
+      marble = lastMover;
+      makeSelected(lastMover);
+    } else {
+      lastMover = null;
+    }
     if (movables.length == 0) { endGame(); }
     for (i=0; i<movables.length; i++) {
       makeSpinnable(movables[i]);
@@ -148,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function switchSelection(marble) {
+    disenableMoves();
     moves = [];
     removeBorder(selected);
     selected = marble;
@@ -158,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function removeSelection(marble) {
     removeBorder(marble);
     selected = null;
+    disenableMoves();
     moves = [];
   }
 
@@ -209,6 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function disenableMoves() {
+    for (i=0; i<moves.length; i++) {
+      moves[i].removeEventListener('click', move);
+    }
+  }
+
   function move() {
     // endGame();
     makeUnspinnable();
@@ -224,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const photo = `${selected.style.backgroundImage[18]}${selected.style.backgroundImage[19]}`;
     addMarble(this, photo);
     selected = null;
+    lastMover = this.firstChild;
     prepareToMove();
   }
 
