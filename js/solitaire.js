@@ -68,11 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i=0; i<7; i++) {
       for (j=0; j<7; j++) {
         if (((i<2 || i>4) && ((j>1) && (j<5))) || (i==2 || i==4) || (i==3 && j!=3)) {
-          // const rn1 = Math.floor(Math.random()*29) + 10;
           const rn = Math.floor(Math.random() * photos.length);
           const pn = photos[rn];
           photos.splice(rn, 1);
-          // addMarble(document.querySelector(`#hole${i}${j}`), rn1);
           addMarble(document.querySelector(`#hole${i}${j}`), pn);
         }
       }

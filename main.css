@@ -73,8 +73,8 @@ body {
 }
 
 .hole {
-  height: 70%;
-  width: 70%;
+  height: 80%;
+  width: 80%;
   border-radius: 50%;
   background-color: black;
   display: flex;
