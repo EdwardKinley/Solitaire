@@ -68,10 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i=0; i<7; i++) {
       for (j=0; j<7; j++) {
         if (((i<2 || i>4) && ((j>1) && (j<5))) || (i==2 || i==4) || (i==3 && j!=3)) {
-          const rn1 = Math.floor(Math.random()*3) + 10;
+          // const rn1 = Math.floor(Math.random()*29) + 10;
           const rn = Math.floor(Math.random() * photos.length);
-          addMarble(document.querySelector(`#hole${i}${j}`), rn1);
-          // addMarble(document.querySelector(`#hole${i}${j}`), rn);
+          const pn = photos[rn];
+          photos.splice(rn, 1);
+          // addMarble(document.querySelector(`#hole${i}${j}`), rn1);
+          addMarble(document.querySelector(`#hole${i}${j}`), pn);
         }
       }
     }
@@ -87,8 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function prepareToMove() {
     movables = identifyMovables();
-    console.log('movables', movables);
-    console.log('last mover', lastMover);
     if (movables.includes(lastMover)) {
       marble = lastMover;
       makeSelected(lastMover);
@@ -230,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function move() {
-    // endGame();
     makeUnspinnable();
     makeUnmovable();
     movables = [];
@@ -278,11 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function endGame() {
-    console.log('end!');
     const playAgainButton = document.createElement('button');
     playAgainButton.textContent = 'Play again';
     document.querySelector('#hole33').appendChild(playAgainButton);
-    console.log(playAgainButton.parentNode);
     playAgainButton.addEventListener('click', () => {
       location.reload();
     })
