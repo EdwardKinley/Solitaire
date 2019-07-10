@@ -101,10 +101,15 @@ button {
   font-size: 3vh;
   animation-name: enter;
   animation-duration: 1s;
+  transition: transform 0.2s ease;
 }
 
 button:focus {
   outline: none;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 @keyframes enter {
