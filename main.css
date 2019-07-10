@@ -103,6 +103,10 @@ button {
   animation-duration: 1s;
 }
 
+button:focus {
+  outline: none;
+}
+
 @keyframes enter {
   0% {
     opacity: 0;
